@@ -89,6 +89,11 @@ def topologyXML(network, labelSwap=False):
         ET.SubElement(pn, NML_PORTGROUP, {ID: BASE_URN + ':' + port.inbound_port.name} )
         ET.SubElement(pn, NML_PORTGROUP, {ID: BASE_URN + ':' + port.outbound_port.name} )
 
+    service_def_id = topology_id + ':sd:EVTS.A-GOLE'
+    service_def = ET.SubElement(nml_topology, NSI_SERVICE_DEFINITION, { ID: service_def_id } )
+    ET.SubElement(service_def, 'name').text = 'GLIF Automated GOLE Ethernet VLAN Transfer Service'
+    ET.SubElement(service_def, 'serviceType').text = cnt.EVTS_AGOLE
+    
     if network.inbound_ports:
         nml_inbound_ports = ET.SubElement(nml_topology, NML_RELATION, {TYPE: NML_HASINBOUNDPORT})
         for port in network.inbound_ports:
@@ -98,11 +103,6 @@ def topologyXML(network, labelSwap=False):
         nml_outbound_ports = ET.SubElement(nml_topology, NML_RELATION, {TYPE: NML_HASOUTBOUNDPORT})
         for port in network.outbound_ports:
             addPort(nml_outbound_ports, port)
-
-    service_def_id = topology_id + ':sd:EVTS.A-GOLE'
-    service_def = ET.SubElement(nml_topology, NSI_SERVICE_DEFINITION, { ID: service_def_id } )
-    ET.SubElement(service_def, 'name').text = 'GLIF Automated GOLE Ethernet VLAN Transfer Service'
-    ET.SubElement(service_def, 'serviceType').text = cnt.EVTS_AGOLE
 
     switch_id = topology_id + ':switch:EVTS.A-GOLE'
     labelSwapping = 'true' if labelSwap else 'false'
