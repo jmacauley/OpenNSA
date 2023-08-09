@@ -19,7 +19,7 @@ ADD . /home/$USER/opennsa/
 RUN apt update \
    && apt install -y \
    libpq-dev \
-   python3 \
+   python3.10 \
    python3-pip \
    netcat-openbsd \
    iputils-ping && \
