@@ -1,6 +1,6 @@
 # OpenNSA docker image
 
-FROM debian:stable-slim
+FROM python:3.10.12-slim-bullseye
 
 LABEL maintainer="Henrik Thostrup Jensen <htj@nordu.net>"
 
@@ -19,7 +19,6 @@ ADD . /home/$USER/opennsa/
 RUN apt update \
    && apt install -y \
    libpq-dev \
-   python3.10 \
    python3-pip \
    netcat-openbsd \
    iputils-ping && \
